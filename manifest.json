@@ -9,6 +9,9 @@
     "48": "./icons/icon-48x48.png",
     "120": "./icons/icon-120x120.png"
   },
+  "action": {
+    "default_popup": "popup.html"
+  },
   "permissions": ["tabs", "activeTab", "scripting"],
   "content_scripts": [
     {
