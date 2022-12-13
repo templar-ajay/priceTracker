@@ -10,19 +10,19 @@
       flipkart: {
         buyNow: ".ihZ75k",
         buttonParent: "._2p6lqe",
-        createButton: "_2KpZ6l",
         buttons: "div._3I9_wc._2p6lqe",
+        createButton: "_2KpZ6l",
       },
     },
     INIT: (website) => {
-      chrome.runtime.onMessage.addListener(function (
-        request,
-        sender,
-        sendResponse
-      ) {
-        console.log("sent from tab.id=", sender.tab.id);
-        const tabId = sender.tab.id;
-      });
+      // chrome.runtime.onMessage.addListener(function (
+      //   request,
+      //   sender,
+      //   sendResponse
+      // ) {
+      //   console.log("sent from tab.id=", sender.tab.id);
+      //   const tabId = sender.tab.id;
+      // });
 
       const buyNowBtn = document.querySelector(MAIN.selectors[website].buyNow);
 
@@ -38,9 +38,8 @@
       const buttons = document.querySelector(MAIN.selectors[website].buttons);
       buttons.addEventListener("click", () => {
         console.log("hi");
-        chrome.browserAction.getPopup(
-          document.querySelector("div").getAttribute("tabID")
-        );
+        // chrome.browserAction.getPopup(
+        // );
       });
     },
     createButton: (clas) => {
