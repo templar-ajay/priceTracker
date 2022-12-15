@@ -15,9 +15,7 @@
     "default_popup": "popup.html",
     "default_title": "Price Tracker"
   },
-  "browser_action": {
-    "popup": "popup.html"
-  },
+
   "permissions": ["tabs", "activeTab", "scripting"],
 
   "content_scripts": [

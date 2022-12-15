@@ -9,44 +9,30 @@
       },
       flipkart: {
         buyNow: ".ihZ75k",
-        buttonParent: "._2p6lqe",
-        buttons: "div._3I9_wc._2p6lqe",
+        body: "body",
         createButton: "_2KpZ6l",
       },
     },
     INIT: (website) => {
-      const buyNowBtn = document.querySelector(MAIN.selectors[website].buyNow);
+      console.log("Welcome to price tracker for", website);
 
-      if (!buyNowBtn) return;
-      const appendTheir = document.querySelector(
-        MAIN.selectors[website].buttonParent
-      );
-      appendTheir.innerHTML = "";
-      appendTheir.appendChild(
-        MAIN.createButton(MAIN.selectors[website].createButton)
-      );
-
-      const buttons = document.querySelector(MAIN.selectors[website].buttons);
-      buttons.addEventListener("click", () => {
-        console.log("hi");
-      });
+      document.body.appendChild(MAIN.createButton());
     },
-    createButton: (clas) => {
-      const TrackBtn = document.createElement("button");
-      TrackBtn.style.fontFamily = "Roboto,Arial,sans-serif";
-      TrackBtn.style.color = "#ffffff";
-      TrackBtn.style.background = "#ff6161";
-      TrackBtn.style.fontSize = "16px";
-      TrackBtn.style.textAlign = "center";
-      TrackBtn.style.borderRadius = "2px";
-      TrackBtn.style.paddingTop = "5px";
-      TrackBtn.style.paddingBottom = "5px";
-      TrackBtn.style.height = "20%";
-      TrackBtn.style.width = "100%";
-      TrackBtn.classList.add(clas);
-      TrackBtn.innerHTML = "Track Price";
-
-      return TrackBtn;
+    createButton: () => {
+      const button = document.createElement("button");
+      button.style.width = "7rem";
+      button.style.height = "2rem";
+      button.style.backgroundColor = "red";
+      button.style.position = "fixed";
+      button.style.bottom = "2rem";
+      button.style.right = "3rem";
+      button.style.fontSize = "medium";
+      button.style.color = "white";
+      button.style.fontWeight = "bold";
+      button.innerText = "Track Price";
+      button.className = "priceTracker";
+      button.addEventListener("click", () => {});
+      return button;
     },
   };
   if (window.location.host === "www.flipkart.com") MAIN.INIT("flipkart");
