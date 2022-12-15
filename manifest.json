@@ -11,23 +11,27 @@
 
   "host_permissions": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
 
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
     "default_popup": "popup.html",
     "default_title": "Price Tracker"
   },
+  "browser_action": {
+    "popup": "popup.html"
+  },
   "permissions": ["tabs", "activeTab", "scripting"],
 
-  "content_scripts": [{
-    "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
-    "js": ["contentScript.js"]
-  }],
+  "content_scripts": [
+    {
+      "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
+      "js": ["contentScript.js"],
+      "run_at": "document_end"
+    }
+  ],
 
-  "web_accessible_resources": [{
-    "resources": [""],
-    "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"]
-  }]
-
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"]
+    }
+  ]
 }
