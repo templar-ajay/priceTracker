@@ -17,7 +17,7 @@
   
   "content_scripts": [{
     "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
-    "css":["contentScript.css"],
+    "css":["style.css"],
     "js": ["contentScript.js"]
     }]
 
