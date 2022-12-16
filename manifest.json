@@ -10,24 +10,15 @@
   },
 
   "host_permissions": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
-
-  "background": {
-    "service_worker": "background.js"
-  },
+  "permissions": ["activeTabs","scripting"],
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "Price Tracker"
+    "default_popup": "popup.html"
   },
-  "permissions": ["tabs", "activeTab", "scripting"],
-
+  
   "content_scripts": [{
     "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
+    "css":["contentScript.css"],
     "js": ["contentScript.js"]
-  }],
-
-  "web_accessible_resources": [{
-    "resources": [""],
-    "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"]
-  }]
+    }]
 
 }
