@@ -6,13 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Track Price</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            min-width: 300px;
+            height: 455px;
+            background-color: #24292f;
+        }
+    </style>
 </head>
 
 <body>
     <div class="extesnion">
 
-        <h1 class="h1-center">Price Tracker</h1>
+
+            <h1 class="h1-center h1-title">Price Tracker</h1>
         
         <div class="main">
             <div class="scrape flex">
@@ -28,8 +42,15 @@
             
             <!-- client input -->
             <div class="client-info flex">
-                <input class="client-input" type="number" placeholder="Enter Price">
-                <a class="submit" href="#">SUBMIT</a>
+
+                    <label class="input-label" for="track-price">Enter Price below which you want message</label>
+                    <input id="track-price" name="track-price"  class="client-input" type="number" required placeholder="Enter Price">
+
+
+                <div class="close-submit">
+                    <a class="submit" href="#">SUBMIT</a>
+                    <a class="submit" href="#">CLOSE</a>
+                </div>
             </div>
             
         </div>

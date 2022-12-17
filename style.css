@@ -3,16 +3,17 @@
 .extesnion{
   z-index:2 !important;
   margin: 5px !important;
+  padding: 5px;
   color: white;
-  top: 5px !important;
-  right: 5px !important;
+  top: 0px !important;
+  right: 0px !important;
   position: absolute !important;
   max-width: 350px !important;
-  min-height: 370px !important;
+  min-height: 450px !important;
   background-color: #24292f;
   font-family: var(--font-main);
   border: 1.5px dashed #cf222e;
- 
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 :root {
@@ -25,13 +26,18 @@
   display: flex;
   align-items: center;
 }
-
-.h1-center {
-  text-align: center;
-  margin-bottom: 30px;
+.title-close{
+  justify-content: space-between;
+}
+.h1-title{
   background: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.h1-center {
+  text-align: center;
+  margin-bottom: 30px;
+ 
 }
 .scrape {
   flex-direction: column;
@@ -50,30 +56,39 @@
 .product-img {
   height: auto;
   max-width: 45%;
+  max-height:200px ;
 }
 
 /* client-info */
 
 .client-info {
   flex-direction: column;
-  gap: 10px;
+
+  padding-bottom:auto;
 }
+
 .client-input {
   border: none;
   min-width: 15rem;
   padding: 8px 8px 8px;
   outline: 1px solid black;
+  user-select:none;
   background: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
 }
-.client-info a {
-  text-decoration: none;
+.close-submit{
+  margin-top: 20px;
+}
+.close-submit a {
+  text-decoration: none !important;
   background: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
   padding: 10px 10px 10px;
-  color: white;
-  font-family: var(--font-main);
+  color: white !important;
+  font-family: var(--font-main) !important;
   border-radius: 30px;
+
   margin-bottom: 10px;
 }
 
@@ -93,4 +108,18 @@ input[type="number"] {
 
 .hide-everything{
   display: none;
+}
+.input-label{
+  width:75%;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.correct{
+outline: 1px solid #2ba640 !important;
+
+}
+.invalid{
+outline: 1px solid #ca0303 !important; 
+
 }

@@ -18,7 +18,7 @@ let on=true;
     
     return TrackBtn
 }
-
+ 
 //! flipkart
 function flipkart(){
     const buyNowBtn=document.querySelector('.ihZ75k')
@@ -34,13 +34,29 @@ function flipkart(){
    const btns= document.querySelector('div._3I9_wc._2p6lqe')
    //add event listner is working
 btns.addEventListener('click',()=>{
-      console.log( window.location.href);
-    
-      
-   const body=document.querySelector('div._2c7YLP.UtUXW0._6t1WkM._3HqJxg')
+
+      if(on!==true)return;
+      on=false;
+      const body=document.querySelector('div._2c7YLP.UtUXW0._6t1WkM._3HqJxg')
       body.style.position='relative';
       body.insertAdjacentHTML('afterbegin',parseExtension(getProductInfo()))
 
+    //Event listener on submit button to do some validation and send data to database 
+            document.querySelector('#submit').addEventListener('click',(e)=>{
+                
+                e.preventDefault()
+                const inputValue=document.querySelector('.client-input')
+                //little validation for input tag
+                    if(inputValue.value ==='')return inputValue.classList.add('invalid')
+                    if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
+                console.log(inputValue.value)
+
+            })
+      //close button logic 
+            document.querySelector('#close').addEventListener('click',(e)=>{
+                document.querySelector('.extesnion').remove()
+                on=true
+            })
    })
 }
 
@@ -62,6 +78,28 @@ function amazon(){
    const btns=document.querySelector('button._2KpZ6l')
     btns.addEventListener('click',(e)=>{
         console.log(window.location.href);
+
+    if(on!==true)return;
+    on=false;
+        const body=document.querySelector('#dp');
+        body.style.position='relative';
+        body.insertAdjacentHTML('afterbegin',parseExtension(getProductInfoAmazon()))
+
+   
+        document.querySelector('#submit').addEventListener('click',(e)=>{
+                console.log('its working')
+            const inputValue=document.querySelector('.client-input')
+            if(inputValue.value ==='')return inputValue.classList.add('invalid')
+            if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
+
+
+        })
+  
+        document.querySelector('#close').addEventListener('click',(e)=>{
+            document.querySelector('.extesnion').remove()
+            on=true
+        })
+
     })
 }
 
@@ -99,7 +137,18 @@ function getProductInfo(val){
 
 
 
-
+ function getProductInfoAmazon(){
+    const obj={
+        imageLink:'',
+        title:'',
+        finalPrice:''
+    }
+    obj.imageLink=document.querySelector('#landingImage').src
+    const title=document.querySelector('#productTitle').innerText.split(' ')
+    obj.title=`${title[0]} ${title[1]} ${title[2]}`
+    obj.finalPrice=document.querySelector('span.a-price-whole').innerText.replace(/[₹,.]/g, '')
+return obj
+ }
 
 
 
@@ -122,7 +171,8 @@ function parseExtension(val){
 
     return  ` 
     <div class='extesnion'>
-    <h1 class="h1-center">Price Tracker</h1>
+
+            <h1 class="h1-center h1-title">Price Tracker</h1>
     
     <div class="main">
         <div class="scrape flex">
@@ -138,8 +188,12 @@ function parseExtension(val){
     
         <!-- client input -->
         <div class="client-info flex">
-            <input class="client-input" type="number" placeholder="Enter Price">
-            <a class="submit" href="#">SUBMIT</a>
+            <label class="input-label" for="track-price">Enter Price below which you want message</label>
+            <input id="track-price" name="track-price" class="client-input" type="number" placeholder="Enter Price">
+            <div class="close-submit">
+                <a id="submit" class="submit" href="#">SUBMIT</a>
+                <a id="close"  class="submit" href="#">CLOSE</a>
+            </div>
         </div>
     
     </div>
