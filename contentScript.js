@@ -1,7 +1,21 @@
 let on=true;
+let arr=[];
+let obj={
+     url:'',
+     finalPrice:'',
+     site:'',
+};
 
-(()=>{
-    const createButton=function(){
+
+
+chrome.storage.local.get(['produtInfo']).then((obj)=>{
+    arr.push(obj.produtInfo);
+    console.log(obj.produtInfo)
+})
+chrome.storage.local.remove;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+window.location.host ==='www.flipkart.com' ? flipkart():window.location.host==='www.amazon.in' ?amazon():''
+function createButton(){
     const TrackBtn=document.createElement('button')
     TrackBtn.style.fontFamily='Roboto,Arial,sans-serif'
     TrackBtn.style.color='#ffffff'
@@ -18,9 +32,11 @@ let on=true;
     
     return TrackBtn
 }
- 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //! flipkart
 function flipkart(){
+
     const buyNowBtn=document.querySelector('.ihZ75k')
     
     if(!buyNowBtn) return
@@ -49,9 +65,16 @@ btns.addEventListener('click',()=>{
                 //little validation for input tag
                     if(inputValue.value ==='')return inputValue.classList.add('invalid')
                     if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
-                console.log(inputValue.value)
 
+                    // set values to extension storage
+                    obj['url']=window.location.href;
+                    obj['finalPrice']=inputValue.value;
+                    obj['site']='flipkart';
+                arr.push(obj)
+                    chrome.storage.local.set({produtInfo:arr})
+                   
             })
+
       //close button logic 
             document.querySelector('#close').addEventListener('click',(e)=>{
                 document.querySelector('.extesnion').remove()
@@ -60,9 +83,13 @@ btns.addEventListener('click',()=>{
    })
 }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function amazon(){
+   obj.push(JSON.parse( window.localStorage.getItem('trackPrice')));
+   console.log(obj.flat(obj.length*10))
+
     // to check if this button exist then run this below code or return here
  const buyNowBtn=document.querySelector('#buy-now-button');
 
@@ -71,54 +98,50 @@ function amazon(){
 
 
    const appendTheir=document.querySelector('div.a-section.a-spacing-small.aok-align-center')
-   appendTheir.innerHTML=''
-    appendTheir.appendChild(createButton())
+    appendTheir.innerHTML=''
+        appendTheir.appendChild(createButton())
 
 
    const btns=document.querySelector('button._2KpZ6l')
-    btns.addEventListener('click',(e)=>{
-        console.log(window.location.href);
+        btns.addEventListener('click',(e)=>{
+         console.log(window.location.href);
 
     if(on!==true)return;
-    on=false;
+        on=false;
         const body=document.querySelector('#dp');
-        body.style.position='relative';
-        body.insertAdjacentHTML('afterbegin',parseExtension(getProductInfoAmazon()))
+            body.style.position='relative';
+            body.insertAdjacentHTML('afterbegin',parseExtension(getProductInfoAmazon()))
 
    
-        document.querySelector('#submit').addEventListener('click',(e)=>{
-                console.log('its working')
-            const inputValue=document.querySelector('.client-input')
-            if(inputValue.value ==='')return inputValue.classList.add('invalid')
-            if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
-
-
-        })
-  
+            document.querySelector('#submit').addEventListener('click',(e)=>{
+                    console.log('its working')
+                const inputValue=document.querySelector('.client-input')
+                    if(inputValue.value ==='')return inputValue.classList.add('invalid')
+                    if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
+                    console.log(inputValue.value)
+                const dataObj={
+                        url:window.location.href,
+                        finalPrice:inputValue.value
+                    }
+                        obj.push(dataObj)
+                        window.localStorage.setItem('trackPrice',JSON.stringify(obj));
+            })
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//close button logic
         document.querySelector('#close').addEventListener('click',(e)=>{
             document.querySelector('.extesnion').remove()
-            on=true
+                on=true
         })
 
     })
 }
-
-
-    window.location.host ==='www.flipkart.com' ? flipkart():window.location.host==='www.amazon.in' ?amazon():''
-
-
-//// 
-
-
-
-     
-
-})();
+////
 
 
 
 
-function getProductInfo(val){
+
+function getProductInfo(){
     const obj={
         imageLink:'',
         title:'',

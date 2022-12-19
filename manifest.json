@@ -10,15 +10,15 @@
   },
 
   "host_permissions": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
-  "permissions": ["activeTabs","scripting"],
+  "permissions": ["tabs","scripting","storage"],
   "action": {
     "default_popup": "popup.html"
   },
   
   "content_scripts": [{
-    "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
+    "matches": ["<all_urls>"],
     "css":["style.css"],
-    "js": ["contentScript.js"]
+    "js": ["contentScript.js","contentScript2.js"]
     }]
 
 }
