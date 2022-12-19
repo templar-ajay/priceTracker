@@ -10,7 +10,7 @@
   },
 
   "host_permissions": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
-  "permissions": ["activeTabs", "scripting"],
+  "permissions": ["tabs", "scripting","storage"],
   "action": {
     "default_popup": "popup.html"
   },
