@@ -10,7 +10,6 @@ chrome.storage.local.get('produtInfo').then((obj)=>{
     arr=obj.produtInfo;
     console.log(arr)
 })
-chrome.storage.local.remove;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 window.location.host ==='www.flipkart.com' ? flipkart():window.location.host==='www.amazon.in' ?amazon():''
 function createButton(){
@@ -68,7 +67,7 @@ btns.addEventListener('click',()=>{
                     obj['url']=window.location.href;
                     obj['finalPrice']=inputValue.value;
                     obj['site']='flipkart';
-                arr.push(obj)
+                arr.push(obj);
                     chrome.storage.local.set({produtInfo:arr})
                    
             })
