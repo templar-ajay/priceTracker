@@ -1,156 +1,179 @@
-let on = true;
+let on=true;
+let arr=[];
+let obj={
+     url:'',
+     finalPrice:'',
+     site:'',
+};
 
-(() => {
-  const createButton = function () {
-    const TrackBtn = document.createElement("button");
-    TrackBtn.style.fontFamily = "Roboto,Arial,sans-serif";
-    TrackBtn.style.color = "#ffffff";
-    TrackBtn.style.background = "#ff6161";
-    TrackBtn.style.fontSize = "16px";
-    TrackBtn.style.textAlign = "center";
-    TrackBtn.style.borderRadius = "2px";
-    TrackBtn.style.paddingTop = "5px";
-    TrackBtn.style.paddingBottom = "5px";
-    TrackBtn.style.height = "20%";
-    TrackBtn.style.width = "100%";
-    TrackBtn.classList.add("_2KpZ6l");
-    TrackBtn.innerHTML = "Track Price";
+chrome.storage.local.get('produtInfo').then((obj)=>{
+    arr=obj.produtInfo;
+    console.log(arr)
+})
+chrome.storage.local.remove;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+window.location.host ==='www.flipkart.com' ? flipkart():window.location.host==='www.amazon.in' ?amazon():''
+function createButton(){
+    const TrackBtn=document.createElement('button')
+    TrackBtn.style.fontFamily='Roboto,Arial,sans-serif'
+    TrackBtn.style.color='#ffffff'
+    TrackBtn.style.background='#ff6161'
+    TrackBtn.style.fontSize='16px'
+    TrackBtn.style.textAlign='center'
+    TrackBtn.style.borderRadius='2px'
+    TrackBtn.style.paddingTop='5px'
+    TrackBtn.style.paddingBottom='5px'
+    TrackBtn.style.height='20%'
+    TrackBtn.style.width='100%'
+    TrackBtn.classList.add('_2KpZ6l')
+    TrackBtn.innerHTML='Track Price'
+    
+    return TrackBtn
+}
 
-    return TrackBtn;
-  };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//! flipkart
+function flipkart(){
 
-  //! flipkart
-  function flipkart() {
-    const buyNowBtn = document.querySelector(".ihZ75k");
+    const buyNowBtn=document.querySelector('.ihZ75k')
+    
+    if(!buyNowBtn) return
 
-    if (!buyNowBtn) return;
 
-    const appendTheir = document.querySelector("._2p6lqe");
-    appendTheir.innerHTML = "";
+    const appendTheir=document.querySelector('._2p6lqe');
+    appendTheir.innerHTML=''
     appendTheir.appendChild(createButton());
+    
 
-    const btns = document.querySelector("div._3I9_wc._2p6lqe");
-    //add event listner is working
-    btns.addEventListener("click", () => {
-      if (on !== true) return;
-      on = false;
-      const body = document.querySelector("div._2c7YLP.UtUXW0._6t1WkM._3HqJxg");
-      body.style.position = "relative";
-      body.insertAdjacentHTML("afterbegin", parseExtension(getProductInfo()));
+   const btns= document.querySelector('div._3I9_wc._2p6lqe')
+   //add event listner is working
+btns.addEventListener('click',()=>{
 
-      //Event listener on submit button to do some validation and send data to database
-      document.querySelector("#submit").addEventListener("click", (e) => {
-        e.preventDefault();
-        const inputValue = document.querySelector(".client-input");
-        //little validation for input tag
-        if (inputValue.value === "") return inputValue.classList.add("invalid");
-        if (inputValue.value !== "") {
-          inputValue.classList.remove("invalid");
-          inputValue.classList.add("correct");
-        }
-        console.log(inputValue.value);
-      });
-      //close button logic
-      document.querySelector("#close").addEventListener("click", (e) => {
-        document.querySelector(".extesnion").remove();
-        on = true;
-      });
-    });
-  }
+      if(on!==true)return;
+      on=false;
+      const body=document.querySelector('div._2c7YLP.UtUXW0._6t1WkM._3HqJxg')
+      body.style.position='relative';
+      body.insertAdjacentHTML('afterbegin',parseExtension(getProductInfo()))
 
-  function amazon() {
+    //Event listener on submit button to do some validation and send data to database 
+            document.querySelector('#submit').addEventListener('click',(e)=>{
+                
+                e.preventDefault()
+                const inputValue=document.querySelector('.client-input')
+                //little validation for input tag
+                    if(inputValue.value ==='')return inputValue.classList.add('invalid')
+                    if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
+
+                    // set values to extension storage
+                    obj['url']=window.location.href;
+                    obj['finalPrice']=inputValue.value;
+                    obj['site']='flipkart';
+                arr.push(obj)
+                    chrome.storage.local.set({produtInfo:arr})
+                   
+            })
+
+      //close button logic 
+            document.querySelector('#close').addEventListener('click',(e)=>{
+                document.querySelector('.extesnion').remove()
+                on=true
+            })
+   })
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function amazon(){
+   obj.push(JSON.parse( window.localStorage.getItem('trackPrice')));
+   console.log(obj.flat(obj.length*10))
+
     // to check if this button exist then run this below code or return here
-    const buyNowBtn = document.querySelector("#buy-now-button");
+ const buyNowBtn=document.querySelector('#buy-now-button');
 
-    if (!buyNowBtn) return;
 
-    const appendTheir = document.querySelector(
-      "div.a-section.a-spacing-small.aok-align-center"
-    );
-    appendTheir.innerHTML = "";
-    appendTheir.appendChild(createButton());
+    if(!buyNowBtn) return
 
-    const appendTheir = document.querySelector(
-      "div.a-section.a-spacing-small.aok-align-center"
-    );
-    appendTheir.innerHTML = "";
-    appendTheir.appendChild(createButton());
 
-    const btns = document.querySelector("button._2KpZ6l");
-    btns.addEventListener("click", (e) => {
-      console.log(window.location.href);
+   const appendTheir=document.querySelector('div.a-section.a-spacing-small.aok-align-center')
+    appendTheir.innerHTML=''
+        appendTheir.appendChild(createButton())
 
-      if (on !== true) return;
-      on = false;
-      const body = document.querySelector("#dp");
-      body.style.position = "relative";
-      body.insertAdjacentHTML(
-        "afterbegin",
-        parseExtension(getProductInfoAmazon())
-      );
 
-      document.querySelector("#submit").addEventListener("click", (e) => {
-        console.log("its working");
-        const inputValue = document.querySelector(".client-input");
-        if (inputValue.value === "") return inputValue.classList.add("invalid");
-        if (inputValue.value !== "") {
-          inputValue.classList.remove("invalid");
-          inputValue.classList.add("correct");
-        }
-      });
+   const btns=document.querySelector('button._2KpZ6l')
+        btns.addEventListener('click',(e)=>{
+         console.log(window.location.href);
 
-      document.querySelector("#close").addEventListener("click", (e) => {
-        document.querySelector(".extesnion").remove();
-        on = true;
-      });
-    });
-  }
+    if(on!==true)return;
+        on=false;
+        const body=document.querySelector('#dp');
+            body.style.position='relative';
+            body.insertAdjacentHTML('afterbegin',parseExtension(getProductInfoAmazon()))
 
-  window.location.host === "www.flipkart.com"
-    ? flipkart()
-    : window.location.host === "www.amazon.in"
-    ? amazon()
-    : "";
+   
+            document.querySelector('#submit').addEventListener('click',(e)=>{
+                    console.log('its working')
+                const inputValue=document.querySelector('.client-input')
+                    if(inputValue.value ==='')return inputValue.classList.add('invalid')
+                    if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
+                    console.log(inputValue.value)
+                const dataObj={
+                        url:window.location.href,
+                        finalPrice:inputValue.value
+                    }
+                        obj.push(dataObj)
+                        window.localStorage.setItem('trackPrice',JSON.stringify(obj));
+            })
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//close button logic
+        document.querySelector('#close').addEventListener('click',(e)=>{
+            document.querySelector('.extesnion').remove()
+                on=true
+        })
 
-  ////
-})();
+    })
+}
+////
 
-function getProductInfo(val) {
-  const obj = {
-    imageLink: "",
-    title: "",
-    finalPrice: "",
-  };
-  obj.imageLink = document.querySelector(
-    "div._3kidJX > div.CXW8mj._3nMexc > img"
-  ).src;
-  const title = document
-    .querySelector("div:nth-child(1) > h1 > span")
-    .innerText.split(" ");
-  obj.title = `${title[0]} ${title[1]} ${title[2]}`;
-  obj.finalPrice = document
-    .querySelector("div._30jeq3._16Jk6d")
-    .innerText.replace(/[₹]/g, "");
-  return obj;
+
+
+
+
+function getProductInfo(){
+    const obj={
+        imageLink:'',
+        title:'',
+        finalPrice:''
+    }
+     obj.imageLink=document.querySelector('div._3kidJX > div.CXW8mj._3nMexc > img').src;
+    const title=document.querySelector('div:nth-child(1) > h1 > span').innerText.split(' ')
+    obj.title=`${title[0]} ${title[1]} ${title[2]}`;
+    obj.finalPrice=document.querySelector('div._30jeq3._16Jk6d').innerText.replace(/[₹]/g, '');
+    return obj
 }
 
-function getProductInfoAmazon() {
-  const obj = {
-    imageLink: "",
-    title: "",
-    finalPrice: "",
-  };
-  obj.imageLink = document.querySelector("#landingImage").src;
-  const title = document.querySelector("#productTitle").innerText.split(" ");
-  obj.title = `${title[0]} ${title[1]} ${title[2]}`;
-  obj.finalPrice = document
-    .querySelector("span.a-price-whole")
-    .innerText.replace(/[₹,.]/g, "");
-  return obj;
+
+
+
+
+
+
+ function getProductInfoAmazon(){
+    const obj={
+        imageLink:'',
+        title:'',
+        finalPrice:''
+    }
+    obj.imageLink=document.querySelector('#landingImage').src
+    const title=document.querySelector('#productTitle').innerText.split(' ')
+    obj.title=`${title[0]} ${title[1]} ${title[2]}`
+    obj.finalPrice=document.querySelector('span.a-price-whole').innerText.replace(/[₹,.]/g, '')
+return obj
 }
 
-function parseExtension(val) {
-  return ` 
+function parseExtension(val){
+
+    return  ` 
     <div class='extesnion'>
 
             <h1 class="h1-center h1-title">Price Tracker</h1>
@@ -179,5 +202,6 @@ function parseExtension(val) {
     
     </div>
     </div>
-    `;
-}
+    `
+    }
+    
