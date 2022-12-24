@@ -7,8 +7,7 @@ let obj={
 };
 
 chrome.storage.local.get('produtInfo').then((obj)=>{
-    arr=obj.produtInfo;
-    console.log(arr)
+    obj.produtInfo?arr=obj.produtInfo :[];
 })
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 window.location.host ==='www.flipkart.com' ? flipkart():window.location.host==='www.amazon.in' ?amazon():''
@@ -29,6 +28,32 @@ function createButton(){
     
     return TrackBtn
 }
+
+
+
+
+async function fetchData(){
+    // getArr.forEach((val)=>{
+    const response=   await fetch('https://bear-flannel-shirt.cyclic.app/info',{
+            method:'post',
+            headers:{"content-Type":"application/json"},
+            body:JSON.stringify({
+                url:'https://www.amazon.in/AmazonBasics-Extended-Gaming-Mouse-Black/dp/B06X19FLTC/?_encoding=UTF8&pd_rd_w=qxdnV&content-id=amzn1.sym.1f592895-6b7a-4b03-9d72-1a40ea8fbeca&pf_rd_p=1f592895-6b7a-4b03-9d72-1a40ea8fbeca&pf_rd_r=H3MV0SPYCFCF736A3M27&pd_rd_wg=8BMmD&pd_rd_r=ba3c73b1-e4e7-4478-8538-26d1fa3dc083&ref_=pd_gw_ci_mcx_mr_hp_atf_m',
+                finalprice:'499',
+                site:'amazon'
+                })
+        })
+
+    const res=await response.json()
+    console.log(res);
+    // })
+}
+
+setTimeout(()=>{fetchData()},10000)
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //! flipkart
@@ -68,6 +93,7 @@ btns.addEventListener('click',()=>{
                     obj['finalPrice']=inputValue.value;
                     obj['site']='flipkart';
                 arr.push(obj);
+                // console.log(arr)
                     chrome.storage.local.set({produtInfo:arr})
                    
             })
@@ -84,9 +110,6 @@ btns.addEventListener('click',()=>{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function amazon(){
-   obj.push(JSON.parse( window.localStorage.getItem('trackPrice')));
-   console.log(obj.flat(obj.length*10))
-
     // to check if this button exist then run this below code or return here
  const buyNowBtn=document.querySelector('#buy-now-button');
 
@@ -115,13 +138,15 @@ function amazon(){
                 const inputValue=document.querySelector('.client-input')
                     if(inputValue.value ==='')return inputValue.classList.add('invalid')
                     if(inputValue.value !==''){inputValue.classList.remove('invalid');inputValue.classList.add('correct')}
-                    console.log(inputValue.value)
-                const dataObj={
-                        url:window.location.href,
-                        finalPrice:inputValue.value
-                    }
-                        obj.push(dataObj)
-                        window.localStorage.setItem('trackPrice',JSON.stringify(obj));
+
+                // set values to extension storage
+                obj['url']=window.location.href;
+                obj['finalPrice']=inputValue.value;
+                obj['site']='amazon';
+            arr.push(obj);
+            // console.log(arr)
+                chrome.storage.local.set({produtInfo:arr})
+
             })
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //close button logic

@@ -5,21 +5,17 @@
 
   "manifest_version": 3,
 
-  "icons": {
-    "120": "./icons/icon-120x120.png"
-  },
+  "icons": {"120": "./icons/icon-120x120.png"},
 
   "host_permissions": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
   "permissions": ["tabs", "scripting","storage"],
-  "action": {
-    "default_popup": "popup.html"
-  },
+  "action": {"default_popup": "popup.html"},
 
   "content_scripts": [
     {
-      "matches": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
+      "matches": ["<all_urls>"],
       "css": ["style.css"],
-      "js": ["contentScript.js"]
+      "js": ["contentScript.js","contentScript2.js"]
     }
   ]
 }
