@@ -8,7 +8,7 @@
   "icons": {"120": "./icons/icon-120x120.png"},
 
   "host_permissions": ["https://*.flipkart.com/*", "https://*.amazon.in/*"],
-  "permissions": ["tabs", "scripting","storage"],
+  "permissions": ["tabs", "scripting","storage","notifications"],
   "action": {"default_popup": "popup.html"},
 
   "content_scripts": [
@@ -17,5 +17,8 @@
       "css": ["style.css"],
       "js": ["contentScript.js","contentScript2.js"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }
