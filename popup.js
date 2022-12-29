@@ -12,7 +12,7 @@ function popup() {
         },
         async (response) => {
           await response?.send.forEach((element, i) => {
-            html = ` <div id='info-${i}' class="info flex">
+            html = ` <div id='${i}' class="info flex">
             <img src="${element.otherInfo.imageLink}" alt="img-1">
             <div class="title-desc">
                 <h2>${element.otherInfo.title}</h2>
@@ -43,6 +43,7 @@ function popup() {
               });
             });
           }); //here Buy now button code ends
+          console.log(response.send);           
         }
       );
     })(); //here the async function for sending message code ends
