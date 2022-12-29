@@ -23,3 +23,9 @@ async function fetchData() {
 setTimeout(() => {
   arr.length !== 0 ? fetchData() : "";
 }, 3600000 / 2);
+
+chrome.runtime.onMessage.addListener(function (reqest, sender, sendResponse) {
+  if (reqest.openPage) {
+    chrome.runtime.sendMessage({ openPage: reqest.openPage });
+  }
+});

@@ -4,10 +4,17 @@ let obj = {
   url: "",
   finalprice: "",
   site: "",
+  otherInfo: "",
 };
 
 chrome.storage.local.get("produtInfo").then((obj) => {
   obj.produtInfo ? (arr = obj.produtInfo) : [];
+  chrome.runtime.onMessage.addListener(function (reqest, sender, sendResponse) {
+    if (reqest.message) {
+      // console.log("popup js is sending Message!");
+      sendResponse({ send: obj.produtInfo });
+    }
+  });
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,6 +76,7 @@ function flipkart() {
       obj["url"] = window.location.href;
       obj["finalprice"] = inputValue.value;
       obj["site"] = "flipkart";
+      obj["otherInfo"] = getProductInfo();
       arr.push(obj);
       // console.log(arr)
       chrome.storage.local.set({ produtInfo: arr });
@@ -119,6 +127,8 @@ function amazon() {
       obj["url"] = window.location.href;
       obj["finalprice"] = inputValue.value;
       obj["site"] = "amazon";
+      obj["otherInfo"] = getProductInfoAmazon();
+
       arr.push(obj);
       // console.log(arr)
       chrome.storage.local.set({ produtInfo: arr });
