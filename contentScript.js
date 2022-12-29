@@ -42,11 +42,11 @@ function flipkart() {
 
   if (!buyNowBtn) return;
 
-  const appendTheir = document.querySelector("._2p6lqe");
-  appendTheir.innerHTML = "";
-  appendTheir.appendChild(createButton());
+  const priceTag = document.querySelector("._30jeq3");
 
-  const btns = document.querySelector("div._3I9_wc._2p6lqe");
+  priceTag.insertAdjacentElement("afterend", createButton());
+
+  const btns = document.querySelector("._25b18c ._2KpZ6l");
   //add event listner is working
   btns.addEventListener("click", () => {
     if (on !== true) return;
@@ -143,12 +143,11 @@ function getProductInfo() {
     title: "",
     finalPrice: "",
   };
-  obj.imageLink = document.querySelector(
-    "div._3kidJX > div.CXW8mj._3nMexc > img"
-  ).src;
+  obj.imageLink = document.querySelector("div._3kidJX img").src;
   const title = document
     .querySelector("div:nth-child(1) > h1 > span")
     .innerText.split(" ");
+  console.log("title", title);
   obj.title = `${title[0]} ${title[1]} ${title[2]}`;
   obj.finalPrice = document
     .querySelector("div._30jeq3._16Jk6d")
