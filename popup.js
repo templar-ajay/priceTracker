@@ -8,13 +8,13 @@ function popup() {
       obj.produtInfo ? (poupArr = obj.produtInfo) : [];
       console.log(poupArr);
       obj?.produtInfo.forEach((element, i) => {
-        html = ` <div id='${i}' class="info flex animation">
+        html = ` <div id='${i}' class="info flex">
             <img src="${element.otherInfo.imageLink}" alt="img-1">
             <div class="title-desc">
                 <h2>${element.otherInfo.title}</h2>
                 <h3>₹${element.otherInfo.finalPrice}</h3>
                 <div class="buttons flex hidden">
-                  <a class="delete-btn" href="#" role="button"><span class="text">Delete</span><span>Confirm</span></a>
+                  <a class="delete-btn buy-now" href="#" role="button">Delete</a>
                   <a class="buy-now" href="${element.url}" target="_blank" role="button">Buy Now</a>
                 </div>
             </div>
