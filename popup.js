@@ -8,14 +8,14 @@ function popup() {
       obj.produtInfo ? (poupArr = obj.produtInfo) : [];
       console.log(poupArr);
       obj?.produtInfo.forEach((element, i) => {
-        html = ` <div id='${i}' class="info flex">
+        html = ` <div id='${i}' class="info flex animation">
             <img src="${element.otherInfo.imageLink}" alt="img-1">
             <div class="title-desc">
                 <h2>${element.otherInfo.title}</h2>
                 <h3>₹${element.otherInfo.finalPrice}</h3>
                 <div class="buttons flex hidden">
                   <a class="delete-btn" href="#" role="button"><span class="text">Delete</span><span>Confirm</span></a>
-                  <a class="buy-now" href="${element.url}" role="button">Buy Now</a>
+                  <a class="buy-now" href="${element.url}" target="_blank" role="button">Buy Now</a>
                 </div>
             </div>
         </div>`;
@@ -28,16 +28,6 @@ function popup() {
           val.querySelector(".buttons").classList.toggle("hidden");
         });
       }); //here button toggle calss ends
-
-      const buyNow = document.querySelectorAll(".buy-now"); // From here buy now button code starts
-      buyNow.forEach((element) => {
-        element.addEventListener("click", (e) => {
-          console.log("button clicked buy now", e.target.href);
-          chrome.tabs.sendMessage(activeTab.id, {
-            openPage: e.target.href,
-          });
-        });
-      }); //here Buy now button code ends
 
       const deleteNow = document.querySelectorAll(".delete-btn");
       deleteNow.forEach((element, i) => {
