@@ -9,12 +9,6 @@ let obj = {
 
 chrome.storage.local.get("produtInfo").then((obj) => {
   obj.produtInfo ? (arr = obj.produtInfo) : [];
-  chrome.runtime.onMessage.addListener(function (reqest, sender, sendResponse) {
-    if (reqest.message) {
-      // console.log("popup js is sending Message!");
-      sendResponse({ send: obj.produtInfo });
-    }
-  });
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

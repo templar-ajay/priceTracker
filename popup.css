@@ -83,29 +83,14 @@ cursor: pointer;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* CSS */
-.button-57 {
+/* Delete btn code start here  */
+.delete-btn {
   position: relative;
   overflow: hidden;
   border: 1px solid #18181a;
   color: #18181a;
   display: inline-block;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 15px;
   padding: 8px 8px 7px;
   text-decoration: none;
@@ -116,13 +101,13 @@ cursor: pointer;
   touch-action: manipulation;
 }
 
-.button-57 span:first-child {
+.delete-btn span:first-child {
   position: relative;
   transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
   z-index: 10;
 }
 
-.button-57 span:last-child {
+.delete-btn span:last-child {
   color: white;
   display: block;
   position: absolute;
@@ -137,7 +122,7 @@ cursor: pointer;
   line-height: 13px;
 }
 
-.button-57:after {
+.delete-btn:after {
   content: "";
   position: absolute;
   bottom: -50%;
@@ -151,38 +136,20 @@ cursor: pointer;
   z-index: 50;
 }
 
-.button-57:hover:after {
+.delete-btn:hover:after {
   transform-origin: bottom center;
   transform: skewY(9.1deg) scaleY(2);
 }
 
-.button-57:hover span:last-child {
+.delete-btn:hover span:last-child {
   transform: translateX(-50%) translateY(-100%);
   opacity: 1;
   transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* CSS */
-.button-87 {
+/* buy now button animation start here */
+.buy-now {
   margin: 10px;
   padding: 8px 12px;
   text-align: center;
@@ -202,13 +169,13 @@ cursor: pointer;
   touch-action: manipulation;
 }
 
-.button-87:hover {
+.buy-now:hover {
   background-position: right center;
   /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
 }
 
-.button-87:active {
+.buy-now:active {
   transform: scale(0.95);
 }
