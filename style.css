@@ -15,11 +15,11 @@
   border: 1.5px dashed #cf222e;
   /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
   /* From https://css.glass */
-background: rgba(0, 0, 0, 0.3);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(6.3px);
--webkit-backdrop-filter: blur(6.3px);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.3px);
+  -webkit-backdrop-filter: blur(6.3px);
 }
 
 :root {
@@ -79,7 +79,7 @@ backdrop-filter: blur(6.3px);
   padding: 8px 8px 8px;
   outline: 1px solid black;
   user-select: none;
-  background: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
+  background: linear-gradient(130deg, #000000, #000000 41.07%, #000000 76.05%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
