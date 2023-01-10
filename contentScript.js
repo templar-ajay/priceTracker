@@ -194,8 +194,8 @@ function parseExtension(val) {
     
         <!-- client input -->
         <div class="client-info flex">
-            <label class="input-label " for="track-price">Enter Price below which you want message</label>
-            <input id="track-price" name="track-price" class="client-input" type="number" placeholder="Enter Price">
+            <label class="input-label " for="track-price">Notify me when price drops below</label>
+            <input id="track-price" name="track-price" class="client-input" type="number" placeholder="Your Price">
             <div class="close-submit">
                 <a id="submit" class="submit" href="#">SUBMIT</a>
                 <a id="close"  class="submit" href="#">CLOSE</a>
