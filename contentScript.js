@@ -147,8 +147,10 @@ function getProductInfo() {
   const title = document
     .querySelector("div:nth-child(1) > h1 > span")
     .innerText.split(" ");
-  console.log("title", title);
-  obj.title = `${title[0]} ${title[1]} ${title[2]}`;
+
+  obj.title = `${title[0]} ${title[1] !== undefined ? title[1] : ""} ${
+    title[2] !== undefined ? title[2] : ""
+  }`;
   obj.finalPrice = document
     .querySelector("div._30jeq3._16Jk6d")
     .innerText.replace(/[₹]/g, "");

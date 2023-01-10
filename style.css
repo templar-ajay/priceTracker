@@ -1,23 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-
-.extesnion{
-  z-index:2 !important;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+.extesnion {
+  z-index: 2 !important;
   margin: 5px !important;
   padding: 5px;
-  color: white;
+  color: black;
   top: 0px !important;
   right: 0px !important;
   position: absolute !important;
   max-width: 350px !important;
   min-height: 450px !important;
-  background-color: #24292f;
-  font-family: var(--font-main);
+  /* background-color: #24292f; */
+  font-family: var(--font-second);
   border: 1.5px dashed #cf222e;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
+  /* From https://css.glass */
+background: rgba(0, 0, 0, 0.3);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(6.3px);
+-webkit-backdrop-filter: blur(6.3px);
 }
 
 :root {
   --font-main: "Roboto", sans-serif;
+  --font-second: "Poppins", sans-serif;
   --background: white;
 }
 
@@ -26,10 +33,10 @@
   display: flex;
   align-items: center;
 }
-.title-close{
+.title-close {
   justify-content: space-between;
 }
-.h1-title{
+.h1-title {
   background: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -37,7 +44,6 @@
 .h1-center {
   text-align: center;
   margin-bottom: 30px;
- 
 }
 .scrape {
   flex-direction: column;
@@ -56,7 +62,7 @@
 .product-img {
   height: auto;
   max-width: 45%;
-  max-height:200px ;
+  max-height: 200px;
 }
 
 /* client-info */
@@ -64,7 +70,7 @@
 .client-info {
   flex-direction: column;
 
-  padding-bottom:auto;
+  padding-bottom: auto;
 }
 
 .client-input {
@@ -72,24 +78,26 @@
   min-width: 15rem;
   padding: 8px 8px 8px;
   outline: 1px solid black;
-  user-select:none;
+  user-select: none;
   background: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
 }
-.close-submit{
+.close-submit {
   margin-top: 20px;
 }
 .close-submit a {
   text-decoration: none !important;
-  background: linear-gradient(130deg, #ff7a18, #af002d 41.07%, #319197 76.05%);
   padding: 10px 10px 10px;
   color: white !important;
-  font-family: var(--font-main) !important;
+  font-family: var(--font-second) !important;
   border-radius: 30px;
-
   margin-bottom: 10px;
+  /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.51);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.8px);
+  -webkit-backdrop-filter: blur(2.8px);
 }
 
 /* remove arrow from input */
@@ -106,20 +114,18 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.hide-everything{
+.hide-everything {
   display: none;
 }
-.input-label{
-  width:75%;
+.input-label {
+  width: 75%;
   font-size: 12px;
   margin-bottom: 5px;
 }
 
-.correct{
-outline: 1px solid #2ba640 !important;
-
+.correct {
+  outline: 1px solid #2ba640 !important;
 }
-.invalid{
-outline: 1px solid #ca0303 !important; 
-
+.invalid {
+  outline: 1px solid #ca0303 !important;
 }
