@@ -60,12 +60,12 @@ function flipkart() {
       e.preventDefault();
       const inputValue = document.querySelector(".client-input");
       //little validation for input tag
-      if (inputValue.value === "") return inputValue.classList.add("invalid");
+      if (inputValue.value === "" || inputValue.value === undefined)
+        return inputValue.classList.add("invalid");
       if (inputValue.value !== "") {
         inputValue.classList.remove("invalid");
         inputValue.classList.add("correct");
       }
-
       // set values to extension storage
       obj["url"] = window.location.href;
       obj["finalprice"] = inputValue.value;
@@ -74,6 +74,8 @@ function flipkart() {
       arr.push(obj);
       // console.log(arr)
       chrome.storage.local.set({ produtInfo: arr });
+      document.querySelector(".extesnion").remove();
+      on = true;
     });
 
     //close button logic
@@ -192,7 +194,7 @@ function parseExtension(val) {
     
         <!-- client input -->
         <div class="client-info flex">
-            <label class="input-label" for="track-price">Enter Price below which you want message</label>
+            <label class="input-label " for="track-price">Enter Price below which you want message</label>
             <input id="track-price" name="track-price" class="client-input" type="number" placeholder="Enter Price">
             <div class="close-submit">
                 <a id="submit" class="submit" href="#">SUBMIT</a>

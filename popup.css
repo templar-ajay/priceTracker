@@ -9,17 +9,18 @@
 body {
   min-width: 370px;
   min-height: 400px;
-  background: rgba(0, 0, 0, 0.74);
+  background: url(./BG.png);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4.7px);
-  -webkit-backdrop-filter: blur(4.7px);
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(2.7px);
+  /* -webkit-backdrop-filter: blur(4.7px); */
+
 }
 
 :root {
   --white: white;
   --heading-font: "Poppins", sans-serif;
   --black: #2d2723;
+  --dark-black: black;
   --pink: #e42661;
   --salety: #8a8f8f;
   --brown: #a97a58;
@@ -38,10 +39,12 @@ a {
 /* main start here  */
 .extension {
   /* From https://css.glass */
- 
+
   color: var(--white);
   font-family: var(--heading-font);
   padding: 20px 0 0px;
+}
+.title {
 }
 .title h2 {
   font-size: 1.5rem;
@@ -54,11 +57,9 @@ a {
   justify-content: flex-start;
   margin-bottom: 3px;
   padding: 5px 3px 5px;
-  background: rgba(255, 255, 255, 0.09);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4.2px);
-  -webkit-backdrop-filter: blur(4.2px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-image: url(./Rectangle1.png);
+  object-fit: contain;
+  overflow: hidden;
 }
 .info:hover {
   cursor: pointer;
