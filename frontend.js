@@ -53,14 +53,19 @@ function shopping(name, bnb, pTag, buttons, bdy) {
   const buyNowBtn = document.querySelector(bnb);
 
   if (!buyNowBtn) return;
-  if (name == "flipkart") {
-    const priceTag = document.querySelector(pTag);
-    priceTag.insertAdjacentElement("afterend", createButton());
-  }
-  if (name == "amazon") {
-    const appendTheir = document.querySelector(pTag);
-    appendTheir.innerHTML = "";
-    appendTheir.appendChild(createButton());
+
+  switch (name) {
+    case "amazon": {
+      const appendTheir = document.querySelector(pTag);
+      appendTheir.innerHTML = "";
+      appendTheir.appendChild(createButton());
+      break;
+    }
+    case "flipkart": {
+      const priceTag = document.querySelector(pTag);
+      priceTag.insertAdjacentElement("afterend", createButton());
+      break;
+    }
   }
   const btns = document.querySelector(buttons);
   //add event listner is working
@@ -120,16 +125,18 @@ function shopping(name, bnb, pTag, buttons, bdy) {
       arr.push(obj);
       // console.log(arr)
       chrome.storage.local.set({ produtInfo: arr });
-      document.querySelector(".extesnion").remove();
-      on = true;
+      closeButton();
     });
 
-    //close button logic
     document.querySelector("#close").addEventListener("click", (e) => {
-      document.querySelector(".extesnion").remove();
-      on = true;
+      closeButton();
     });
   });
+}
+//close button logic//
+function closeButton() {
+  document.querySelector(".extesnion").remove();
+  on = true;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
