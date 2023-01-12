@@ -1,34 +1,13 @@
 let on = true;
 var arr = [];
-let obj = {
-  url: "",
-  finalprice: "",
-  site: "",
-  otherInfo: "",
-};
+let obj = {url: "",finalprice: "",site: "",otherInfo: "",};
 
 chrome.storage.local.get("produtInfo").then((obj) => {
   obj.produtInfo ? (arr = obj.produtInfo) : [];
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-window.location.host === "www.flipkart.com"
-  ? shopping(
-      "flipkart",
-      ".ihZ75k",
-      "._30jeq3",
-      "._25b18c ._2KpZ6l",
-      "div._2c7YLP.UtUXW0._6t1WkM._3HqJxg"
-    )
-  : window.location.host === "www.amazon.in"
-  ? shopping(
-      "amazon",
-      "#buy-now-button",
-      "div.a-section.a-spacing-small.aok-align-center",
-      "button._2KpZ6l",
-      "#dp"
-    )
-  : "";
+window.location.host === "www.flipkart.com" ? shopping(  "flipkart",  ".ihZ75k",  "._30jeq3",  "._25b18c ._2KpZ6l",  "div._2c7YLP.UtUXW0._6t1WkM._3HqJxg"): window.location.host === "www.amazon.in" ? shopping(  "amazon",  "#buy-now-button",  "div.a-section.a-spacing-small.aok-align-center",  "button._2KpZ6l",  "#dp") : "";
 function createButton() {
   const TrackBtn = document.createElement("button");
   TrackBtn.style.fontFamily = "Roboto,Arial,sans-serif";
@@ -72,56 +51,26 @@ function shopping(name, bnb, pTag, buttons, bdy) {
   btns.addEventListener("click", () => {
     if (on !== true) return;
     on = false;
-    const body = document.querySelector(bdy);
-    body.style.position = "relative";
-    body.insertAdjacentHTML(
-      "afterbegin",
-      parseExtension(
-        name == "flipkart"
-          ? getProductInfo(
-              "div._3kidJX img",
-              "div:nth-child(1) > h1 > span",
-              "div._30jeq3._16Jk6d"
-            )
-          : name == "amazon"
-          ? getProductInfo(
-              "#landingImage",
-              "#productTitle",
-              "span.a-price-whole"
-            )
-          : ""
-      )
-    );
+      const body = document.querySelector(bdy);
+      body.style.position = "relative";
+      body.insertAdjacentHTML("afterbegin",parseExtension(name == "flipkart" ? getProductInfo(  "div._3kidJX img",  "div:nth-child(1) > h1 > span",  "div._30jeq3._16Jk6d"): name == "amazon" ? getProductInfo( "#landingImage", "#productTitle", "span.a-price-whole") : ""));
 
     //Event listener on submit button to do some validation and send data to database
-    document.querySelector("#submit").addEventListener("click", (e) => {
-      e.preventDefault();
-      const inputValue = document.querySelector(".client-input");
-      //little validation for input tag
-      if (inputValue.value === "" || inputValue.value === undefined)
-        return inputValue.classList.add("invalid");
-      if (inputValue.value !== "") {
-        inputValue.classList.remove("invalid");
-        inputValue.classList.add("correct");
-      }
+        document.querySelector("#submit").addEventListener("click", (e) => {
+          e.preventDefault();
+          const inputValue = document.querySelector(".client-input");
+          //little validation for input tag
+            if (inputValue.value === "" || inputValue.value === undefined)
+              return inputValue.classList.add("invalid");
+                if (inputValue.value !== "") {
+                  inputValue.classList.remove("invalid");
+                  inputValue.classList.add("correct");
+                }
       // set values to extension storage
       obj["url"] = window.location.href;
       obj["finalprice"] = inputValue.value;
       obj["site"] = name;
-      obj["otherInfo"] =
-        name == "flipkart"
-          ? getProductInfo(
-              "div._3kidJX img",
-              "div:nth-child(1) > h1 > span",
-              "div._30jeq3._16Jk6d"
-            )
-          : name == "amazon"
-          ? getProductInfo(
-              "#landingImage",
-              "#productTitle",
-              "span.a-price-whole"
-            )
-          : "";
+      obj["otherInfo"] = name == "flipkart"? getProductInfo(  "div._3kidJX img",  "div:nth-child(1) > h1 > span",  "div._30jeq3._16Jk6d"): name == "amazon"? getProductInfo(  "#landingImage",  "#productTitle",  "span.a-price-whole"): "";
       arr.push(obj);
       // console.log(arr)
       chrome.storage.local.set({ produtInfo: arr });
