@@ -62,9 +62,9 @@ function shopping(name, bnb, pTag, buttons, bdy) {
           //little validation for input tag
             if (inputValue.value === "" || inputValue.value === undefined)
               return inputValue.classList.add("invalid");
-                if (inputValue.value !== "") {
-                  inputValue.classList.remove("invalid");
-                  inputValue.classList.add("correct");
+                  if (inputValue.value !== "") {
+                    inputValue.classList.remove("invalid");
+                    inputValue.classList.add("correct");
                 }
       // set values to extension storage
       obj["url"] = window.location.href;
@@ -91,18 +91,14 @@ function closeButton() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getProductInfo(imglink, headTitle, fPrice) {
-  const obj = {
-    imageLink: "",
-    title: "",
-    finalPrice: "",
-  };
-  obj.imageLink = document.querySelector(imglink).src;
-  const title = document.querySelector(headTitle).innerText.split(" ");
-  obj.title = `${title[0]} ${title[1] !== undefined ? title[1] : ""} ${
-    title[2] !== undefined ? title[2] : ""
+  const obj = {  imageLink: "",  title: "",  finalPrice: "",};
+    obj.imageLink = document.querySelector(imglink).src;
+      const title = document.querySelector(headTitle).innerText.split(" ");
+        obj.title = `${title[0]} ${title[1] !== undefined ? title[1] : ""} ${
+          title[2] !== undefined ? title[2] : ""
   }`;
-  obj.finalPrice = document.querySelector(fPrice).innerText.replace(/[₹]/g, "");
-  return obj;
+          obj.finalPrice = document.querySelector(fPrice).innerText.replace(/[₹]/g, "");
+          return obj;
 }
 
 function parseExtension(val) {
