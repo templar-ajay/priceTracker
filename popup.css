@@ -9,11 +9,10 @@
 body {
   min-width: 370px;
   min-height: 400px;
-  background: url(./BG.png);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2.7px);
-  /* -webkit-backdrop-filter: blur(4.7px); */
-
+  /* From https://css.glass */
+  background: var(--black);
+  backdrop-filter: blur(7.6px);
+  /* -webkit-backdrop-filter: blur(7.6px); */
 }
 
 :root {
@@ -57,7 +56,7 @@ a {
   justify-content: flex-start;
   margin-bottom: 3px;
   padding: 5px 3px 5px;
-  background-image: url(./Rectangle1.png);
+  background-image: url(./Rectangle1.svg);
   object-fit: contain;
   overflow: hidden;
 }

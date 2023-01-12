@@ -13,9 +13,21 @@ chrome.storage.local.get("produtInfo").then((obj) => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 window.location.host === "www.flipkart.com"
-  ? flipkart()
+  ? shopping(
+      "flipkart",
+      ".ihZ75k",
+      "._30jeq3",
+      "._25b18c ._2KpZ6l",
+      "div._2c7YLP.UtUXW0._6t1WkM._3HqJxg"
+    )
   : window.location.host === "www.amazon.in"
-  ? amazon()
+  ? shopping(
+      "amazon",
+      "#buy-now-button",
+      "div.a-section.a-spacing-small.aok-align-center",
+      "button._2KpZ6l",
+      "#dp"
+    )
   : "";
 function createButton() {
   const TrackBtn = document.createElement("button");
@@ -37,23 +49,44 @@ function createButton() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //! flipkart
-function flipkart() {
-  const buyNowBtn = document.querySelector(".ihZ75k");
+function shopping(name, bnb, pTag, buttons, bdy) {
+  const buyNowBtn = document.querySelector(bnb);
 
   if (!buyNowBtn) return;
-
-  const priceTag = document.querySelector("._30jeq3");
-
-  priceTag.insertAdjacentElement("afterend", createButton());
-
-  const btns = document.querySelector("._25b18c ._2KpZ6l");
+  if (name == "flipkart") {
+    const priceTag = document.querySelector(pTag);
+    priceTag.insertAdjacentElement("afterend", createButton());
+  }
+  if (name == "amazon") {
+    const appendTheir = document.querySelector(pTag);
+    appendTheir.innerHTML = "";
+    appendTheir.appendChild(createButton());
+  }
+  const btns = document.querySelector(buttons);
   //add event listner is working
   btns.addEventListener("click", () => {
     if (on !== true) return;
     on = false;
-    const body = document.querySelector("div._2c7YLP.UtUXW0._6t1WkM._3HqJxg");
+    const body = document.querySelector(bdy);
     body.style.position = "relative";
-    body.insertAdjacentHTML("afterbegin", parseExtension(getProductInfo()));
+    body.insertAdjacentHTML(
+      "afterbegin",
+      parseExtension(
+        name == "flipkart"
+          ? getProductInfo(
+              "div._3kidJX img",
+              "div:nth-child(1) > h1 > span",
+              "div._30jeq3._16Jk6d"
+            )
+          : name == "amazon"
+          ? getProductInfo(
+              "#landingImage",
+              "#productTitle",
+              "span.a-price-whole"
+            )
+          : ""
+      )
+    );
 
     //Event listener on submit button to do some validation and send data to database
     document.querySelector("#submit").addEventListener("click", (e) => {
@@ -69,8 +102,21 @@ function flipkart() {
       // set values to extension storage
       obj["url"] = window.location.href;
       obj["finalprice"] = inputValue.value;
-      obj["site"] = "flipkart";
-      obj["otherInfo"] = getProductInfo();
+      obj["site"] = name;
+      obj["otherInfo"] =
+        name == "flipkart"
+          ? getProductInfo(
+              "div._3kidJX img",
+              "div:nth-child(1) > h1 > span",
+              "div._30jeq3._16Jk6d"
+            )
+          : name == "amazon"
+          ? getProductInfo(
+              "#landingImage",
+              "#productTitle",
+              "span.a-price-whole"
+            )
+          : "";
       arr.push(obj);
       // console.log(arr)
       chrome.storage.local.set({ produtInfo: arr });
@@ -88,89 +134,18 @@ function flipkart() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function amazon() {
-  // to check if this button exist then run this below code or return here
-  const buyNowBtn = document.querySelector("#buy-now-button");
-
-  if (!buyNowBtn) return;
-
-  const appendTheir = document.querySelector(
-    "div.a-section.a-spacing-small.aok-align-center"
-  );
-  appendTheir.innerHTML = "";
-  appendTheir.appendChild(createButton());
-
-  const btns = document.querySelector("button._2KpZ6l");
-  btns.addEventListener("click", (e) => {
-    if (on !== true) return;
-    on = false;
-    const body = document.querySelector("#dp");
-    body.style.position = "relative";
-    body.insertAdjacentHTML(
-      "afterbegin",
-      parseExtension(getProductInfoAmazon())
-    );
-
-    document.querySelector("#submit").addEventListener("click", (e) => {
-      const inputValue = document.querySelector(".client-input");
-      if (inputValue.value === "") return inputValue.classList.add("invalid");
-      if (inputValue.value !== "") {
-        inputValue.classList.remove("invalid");
-        inputValue.classList.add("correct");
-      }
-
-      // set values to extension storage
-      obj["url"] = window.location.href;
-      obj["finalprice"] = inputValue.value;
-      obj["site"] = "amazon";
-      obj["otherInfo"] = getProductInfoAmazon();
-
-      arr.push(obj);
-      // console.log(arr)
-      chrome.storage.local.set({ produtInfo: arr });
-    });
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //close button logic
-    document.querySelector("#close").addEventListener("click", (e) => {
-      document.querySelector(".extesnion").remove();
-      on = true;
-    });
-  });
-}
-////
-
-function getProductInfo() {
+function getProductInfo(imglink, headTitle, fPrice) {
   const obj = {
     imageLink: "",
     title: "",
     finalPrice: "",
   };
-  obj.imageLink = document.querySelector("div._3kidJX img").src;
-  const title = document
-    .querySelector("div:nth-child(1) > h1 > span")
-    .innerText.split(" ");
-
+  obj.imageLink = document.querySelector(imglink).src;
+  const title = document.querySelector(headTitle).innerText.split(" ");
   obj.title = `${title[0]} ${title[1] !== undefined ? title[1] : ""} ${
     title[2] !== undefined ? title[2] : ""
   }`;
-  obj.finalPrice = document
-    .querySelector("div._30jeq3._16Jk6d")
-    .innerText.replace(/[₹]/g, "");
-  return obj;
-}
-
-function getProductInfoAmazon() {
-  const obj = {
-    imageLink: "",
-    title: "",
-    finalPrice: "",
-  };
-  obj.imageLink = document.querySelector("#landingImage").src;
-  const title = document.querySelector("#productTitle").innerText.split(" ");
-  obj.title = `${title[0]} ${title[1]} ${title[2]}`;
-  obj.finalPrice = document
-    .querySelector("span.a-price-whole")
-    .innerText.replace(/[₹,.]/g, "");
+  obj.finalPrice = document.querySelector(fPrice).innerText.replace(/[₹]/g, "");
   return obj;
 }
 
