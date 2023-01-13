@@ -54,7 +54,7 @@ function shopping(name, bnb, pTag, buttons, bdy) {
       const body = document.querySelector(bdy);
       body.style.position = "relative";
       body.insertAdjacentHTML("afterbegin",parseExtension(name == "flipkart" ? getProductInfo(  "div._3kidJX img",  "div:nth-child(1) > h1 > span",  "div._30jeq3._16Jk6d"): name == "amazon" ? getProductInfo( "#landingImage", "#productTitle", "span.a-price-whole") : ""));
-
+    console.log(name == "flipkart"? getProductInfo(  "div._3kidJX img",  "div:nth-child(1) > h1 > span",  "div._30jeq3._16Jk6d"): name == "amazon"? getProductInfo(  "#landingImage",  "#productTitle",  "span.a-price-whole"): "")
     //Event listener on submit button to do some validation and send data to database
         document.querySelector("#submit").addEventListener("click", (e) => {
           e.preventDefault();
@@ -96,7 +96,7 @@ function getProductInfo(imglink, headTitle, fPrice) {
       const title = document.querySelector(headTitle).innerText.split(" ");
         obj.title = `${title[0]} ${title[1] !== undefined ? title[1] : ""} ${
           title[2] !== undefined ? title[2] : ""
-  }`;
+  }...`;
           obj.finalPrice = document.querySelector(fPrice).innerText.replace(/[₹]/g, "");
           return obj;
 }

@@ -24,13 +24,10 @@ function popup() {
 
       const infoo = document.querySelectorAll(".info"); // from here buttons toggle class start which hides and show the button in view
       infoo.forEach((val, i) => {
-        val.addEventListener("mouseover", () => {
-          val.querySelector(".buttons").classList.remove("hidden");
+        val.addEventListener("click", () => {
+          val.querySelector(".buttons").classList.toggle("hidden");
         });
-        val.addEventListener("mouseout",()=>{
-          val.querySelector(".buttons").classList.add("hidden");
 
-        })
       }); //here button toggle calss ends
 
       const deleteNow = document.querySelectorAll(".delete-btn");
