@@ -33,6 +33,7 @@ a {
 }
 .hidden {
   display: none;
+  
 }
 
 /* main start here  */
@@ -59,6 +60,8 @@ a {
   background-image: url(./Rectangle1.svg);
   object-fit: contain;
   overflow: hidden;
+transition: 1s;
+
 }
 .info:hover {
   cursor: pointer;
