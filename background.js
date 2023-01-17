@@ -7,6 +7,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         iconUrl: request.hello.imageLink,
         title: `${request.hello.webiste}`.toUpperCase(),
         message: `Price is down to ${request.hello.currentPrice}`,
+        silent:false
       },
       () => {}
     );

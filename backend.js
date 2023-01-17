@@ -22,4 +22,4 @@ async function fetchData() {
 
 setTimeout(() => {
   arr.length !== 0 ? fetchData() : "";
-}, 3600000 / 2);
+}, 3600000/2 );
