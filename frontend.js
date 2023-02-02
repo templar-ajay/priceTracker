@@ -7,7 +7,7 @@ chrome.storage.local.get("produtInfo").then((obj) => {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-window.location.host === "www.flipkart.com" ? shopping(  "flipkart",  ".ihZ75k",  "._30jeq3",  "._25b18c ._2KpZ6l",  "div._2c7YLP.UtUXW0._6t1WkM._3HqJxg"): window.location.host === "www.amazon.in" ? shopping(  "amazon",  "#buy-now-button",  "div.a-section.a-spacing-small.aok-align-center",  "button._2KpZ6l",  "#dp") : "";
+window.location.host === "www.flipkart.com" ? shopping(  "flipkart",  ".ihZ75k",  "._25b18c",  "._25b18c ._2KpZ6l",  "div._2c7YLP.UtUXW0._6t1WkM._3HqJxg"): window.location.host === "www.amazon.in" ? shopping(  "amazon",  "#buy-now-button",  "div.a-section.a-spacing-small.aok-align-center",  "button._2KpZ6l",  "#dp") : "";
 function createButton() {
   const TrackBtn = document.createElement("button");
   TrackBtn.style.fontFamily = "Roboto,Arial,sans-serif";
@@ -42,7 +42,7 @@ function shopping(name, bnb, pTag, buttons, bdy) {
     }
     case "flipkart": {
       const priceTag = document.querySelector(pTag);
-      priceTag.insertAdjacentElement("afterend", createButton());
+      priceTag.appendChild(createButton());
       break;
     }
   }
