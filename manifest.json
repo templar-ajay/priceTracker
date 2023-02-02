@@ -1,7 +1,7 @@
 {
   "name": "Price Tracker",
   "version": "0.0.1",
-  "description": "can Inject JavaScript code on every web page ",
+  "description": "Track prices of your products on FLIPKART & AMAZON (india), when prices goes down you will get notification",
 
   "manifest_version": 3,
 
