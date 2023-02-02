@@ -1,6 +1,4 @@
 async function fetchData() {
-  console.log(JSON.stringify( arr))
-
   const response = await fetch('https://bear-flannel-shirt.cyclic.app/info', {
     method: "post",
     headers: { "content-Type": "application/json" },
@@ -9,7 +7,7 @@ async function fetchData() {
   });
   
   const res = await response.json();
-  console.log(res)
+
   res.forEach((element, i) => {
     // console.log(element);
     if (
@@ -25,4 +23,4 @@ async function fetchData() {
 
 setTimeout(() => {
   arr.length !== 0 ? fetchData() : "";
-}, 6000 );
+}, 3600000/2 );
